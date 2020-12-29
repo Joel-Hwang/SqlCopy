@@ -19,12 +19,13 @@ namespace SqlCopy
         [STAThread]
         static void Main(string[] args)
         {
-            OpenClipboard(IntPtr.Zero);
-            var yourString = getData();
-            var ptr = Marshal.StringToHGlobalUni(yourString);
-            SetClipboardData(13, ptr);
-            CloseClipboard();
-            Marshal.FreeHGlobal(ptr);
+             OpenClipboard(IntPtr.Zero);
+             var yourString = getData();
+
+             var ptr = Marshal.StringToHGlobalUni(yourString);
+             SetClipboardData(13, ptr);
+             CloseClipboard();
+             Marshal.FreeHGlobal(ptr);
         }
 
         static string getData() {
@@ -37,8 +38,9 @@ namespace SqlCopy
             foreach (string line in query) {
                 result = result + "\"" + line + " \\n\"+\r\n";
             }
-
-            return result.Substring(0, result.Length-3)+";";
+            result = result.Substring(0, result.Length - 3) + ";";
+            Console.WriteLine(result);
+            return result;
         
         }
     }
