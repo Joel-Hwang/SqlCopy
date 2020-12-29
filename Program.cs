@@ -31,8 +31,9 @@ namespace SqlCopy
             string result = "";
             IntPtr ptr = GetClipboardData(13);
             string cbData = System.Runtime.InteropServices.Marshal.PtrToStringAuto(ptr);
-            string[] query = cbData.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+            if (String.IsNullOrEmpty(cbData)) return "";
 
+            string[] query = cbData.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
             foreach (string line in query) {
                 result = result + "\"" + line + " \\n\"+\r\n";
             }
